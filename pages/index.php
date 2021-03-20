@@ -45,11 +45,6 @@
 
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto">
-              <li class="search-bar input-group">
-                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split" ></i>
-                  <span class="d-lg-none d-md-block">Pesquisar</span>
-                </button>
-              </li>
               <li class="nav-item">
                 <a href="https://instagram.com/programadormaroto?igshid=xfyj59z44u9z" target="_blank">
                   <div class="photo">
@@ -62,18 +57,6 @@
           </div>
         </div>
       </nav>
-      <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- End Navbar -->
       <div class="content">
       
@@ -81,15 +64,50 @@
         <?php 
 
             if(isset($_GET['page']) && $_GET['page'] == 'url') {
-                include 'url.php';
+              
+              $out = array();
+              foreach (glob('../img-qrcodes/url/*.png') as $filename) {
+                  $p = pathinfo($filename);
+                  $out[] = $p['filename'];
+              }
+              
+              include 'url.php';
             } elseif (isset($_GET['page']) && $_GET['page'] == 'phone') {
-                include 'phone.php';
+              
+              $out = array();
+              foreach (glob('../img-qrcodes/phone/*.png') as $filename) {
+                  $p = pathinfo($filename);
+                  $out[] = $p['filename'];
+              }
+
+              include 'phone.php';
             } elseif (isset($_GET['page']) && $_GET['page'] == 'sms') {
-                include 'sms.php';
+
+              $out = array();
+              foreach (glob('../img-qrcodes/sms/*.png') as $filename) {
+                  $p = pathinfo($filename);
+                  $out[] = $p['filename'];
+              }
+
+              include 'sms.php';
             } elseif (isset($_GET['page']) && $_GET['page'] == 'email') {
-                include 'email.php';
+
+              $out = array();
+              foreach (glob('../img-qrcodes/email/*.png') as $filename) {
+                  $p = pathinfo($filename);
+                  $out[] = $p['filename'];
+              }
+
+              include 'email.php';
             } elseif (isset($_GET['page']) && $_GET['page'] == 'text') {
-                include 'text.php';
+
+              $out = array();
+              foreach (glob('../img-qrcodes/text/*.png') as $filename) {
+                  $p = pathinfo($filename);
+                  $out[] = $p['filename'];
+              }
+
+              include 'text.php';
             }
             
         ?>

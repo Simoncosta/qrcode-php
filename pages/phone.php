@@ -4,15 +4,17 @@
       <div class="card-header">
         <h5 class="title">Telefone</h5>
       </div>
-      <form method="GET" action="">
+      <form method="GET" action="../helpers/insert.php">
       <div class="card-body">
           <div class="row">
+
+            <input type="hidden" name="page" value="phone">
+            <input type="hidden" name="acao" value="inserir">
             
             <div class="col-md-12">
               <div class="form-group">
                 <label>Telefone</label>
-                <input type="text" class="form-control" placeholder="phone" name="phone" value="(00)98765-4321">
-                <input type="hidden" name="page" value="phone">
+                <input type="text" class="form-control" placeholder="phone" name="phone" value="<?= isset($_GET['phone']) ? $_GET['phone'] : '(00)98765-4321' ?>">
               </div>
             </div>
           </div>
@@ -34,37 +36,57 @@
             <div class="block block-three"></div>
             <div class="block block-four"></div>
             <a href="javascript:void(0)">
-
-              <?php
-                require_once('../vendor/phpqrcode/qrlib.php');
-
-                // Configuramos um nome único para o QR Code com base no número da matrícula.
-                $qrCodeName =  "../img-qrcodes/phone/". date('d-m-Y H-m-i') .".png";
-                
-                // here our data
-                $phoneNo = isset($_GET['phone']) ? $_GET['phone'] : '(00)98765-4321';
-                
-                // we building raw data
-                $codeContents = 'tel:'.$phoneNo;
-
-                if(isset($_GET['phone']))
-                {
-                  // generating
-                  QRcode::png(isset($codeContents) ? $codeContents : '(00)98765-4321', $qrCodeName, QR_ECLEVEL_H, 3);
-                
-                  // displaying
-                  echo "<img src='{$qrCodeName}'>";
-                }
-              ?>
+              <img src='<?= isset($_GET['arquivo']) ? $_GET['arquivo'] : '' ?>'>
             </a>
-            <hr>
+            <hr><hr>
             <p class="description">
-              URL: <?= isset($_GET['phone']) ? $_GET['phone'] : '(00)98765-4321' ?>
+              TELEFONE: <?= isset($_GET['phone']) ? $_GET['phone'] : '(00)98765-4321' ?>
               <br><br>
               Salvo em: <?= "qrcode-php/img-qrcodes/phone/" ?>
             </p>
+            <hr><hr>
+            <p>
+            <?php if(isset($_GET['phone'])) { ?>
+              <a type="button" class="btn btn-fill btn-success" href="<?= $qrCodeName ?>" download><i class="tim-icons icon-cloud-download-93"></i> Download</a>
+            <?php } ?>
+            </p>
           </div>
         </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header">
+        <h4 class="card-title"> Arquivos QR Codes - PNG</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive ps">
+          <table class="table tablesorter " id="">
+            <thead class=" text-primary">
+              <tr>
+                <th>
+                  Nome
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+             <?php foreach($out as $file) { ?>
+              <tr>
+                <td>
+                  <?= $file.".png" ?>
+                </td>
+                <td>
+                  <a type="button" class="btn btn-fill btn-success" href="../img-qrcodes/phone/<?= $file.".png" ?>" download><i class="tim-icons icon-cloud-download-93"></i> Download</a>
+                  <a type="button" class="btn btn-fill btn-danger" href="../helpers/delete.php?page=phone&acao=excluir&arquivo=../img-qrcodes/phone/<?= $file.".png" ?>"><i class="tim-icons icon-trash-simple"></i></a>
+                </td>
+              </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
       </div>
     </div>
   </div>
