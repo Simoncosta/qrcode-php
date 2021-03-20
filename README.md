@@ -1,5 +1,7 @@
 ## PROJETO ##
 
+view: https://qrcodedevmaroto.000webhostapp.com/
+
 Código QR é um código de barras, ou barrametrico, bidimensional, que pode ser facilmente escaneado usando a maioria dos telefones celulares equipados com câmera.
 Esse código é feito em php e pode ser facilmente manipluado e convertido em:
 * TEXTO

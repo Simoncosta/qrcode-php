@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon/Favicon.ico">
   <title>
-    QR Code URL
+    Dev Maroto
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
@@ -108,6 +108,15 @@
               }
 
               include 'text.php';
+            } elseif (isset($_GET['page']) && $_GET['page'] == 'whatsapp') {
+
+              $out = array();
+              foreach (glob('../img-qrcodes/whatsapp/*.png') as $filename) {
+                  $p = pathinfo($filename);
+                  $out[] = $p['filename'];
+              }
+
+              include 'whatsapp.php';
             }
             
         ?>

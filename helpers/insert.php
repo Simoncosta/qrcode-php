@@ -21,7 +21,7 @@ if(isset($_GET['acao']) && $_GET['acao'] == "inserir")
             QRcode::png(isset($_GET['url']) ? $_GET['url'] : 'www.programadormaroto.co', $qrCodeName, QR_ECLEVEL_H);
         }
         
-        header('Location: '. 'http://localhost/qrcode-php/pages/index.php?page=url&arquivo='. $qrCodeName .'&url='. $_GET['url']);
+        header('Location: '. '../pages/index.php?page=url&arquivo='. $qrCodeName .'&url='. $_GET['url']);
     
     } elseif($_GET['page'] == "phone") {
 
@@ -40,7 +40,7 @@ if(isset($_GET['acao']) && $_GET['acao'] == "inserir")
             QRcode::png(isset($codeContents) ? $codeContents : '(00)98765-4321', $qrCodeName, QR_ECLEVEL_H, 3);
         }
 
-        header('Location: '. 'http://localhost/qrcode-php/pages/index.php?page=phone&arquivo='. $qrCodeName .'&phone='. $_GET['phone']);
+        header('Location: '. '../pages/index.php?page=phone&arquivo='. $qrCodeName .'&phone='. $_GET['phone']);
 
     } elseif($_GET['page'] == "text") {
 
@@ -57,7 +57,7 @@ if(isset($_GET['acao']) && $_GET['acao'] == "inserir")
             QRcode::png($_GET['text'], $qrCodeName);
         }
 
-        header('Location: '. 'http://localhost/qrcode-php/pages/index.php?page=text&arquivo='. $qrCodeName .'&text='. $_GET['text']);
+        header('Location: '. '../pages/index.php?page=text&arquivo='. $qrCodeName .'&text='. $_GET['text']);
 
     } elseif($_GET['page'] == "sms") {
 
@@ -78,7 +78,7 @@ if(isset($_GET['acao']) && $_GET['acao'] == "inserir")
             QRcode::png(isset($codeContents) ? $codeContents : '(00)98765-4321', $qrCodeName, QR_ECLEVEL_H, 3);
         }
 
-        header('Location: '. 'http://localhost/qrcode-php/pages/index.php?page=sms&arquivo='. $qrCodeName .'&sms='. $_GET['sms']);
+        header('Location: '. '../pages/index.php?page=sms&arquivo='. $qrCodeName .'&sms='. $_GET['sms']);
 
     } elseif($_GET['page'] == "email") {
 
@@ -107,8 +107,29 @@ if(isset($_GET['acao']) && $_GET['acao'] == "inserir")
             echo "<img src='{$qrCodeName}'>";
         }
 
-        header('Location: '. 'http://localhost/qrcode-php/pages/index.php?page=email');
-        header('Location: '. 'http://localhost/qrcode-php/pages/index.php?page=email&arquivo='. $qrCodeName .'&email='. $_GET['email']. '&subject='. $_GET['subject']. '&body='. $_GET['body']);
+        header('Location: '. '../pages/index.php?page=email&arquivo='. $qrCodeName .'&email='. $_GET['email']. '&subject='. $_GET['subject']. '&email='. $_GET['email']);
+
+    } elseif($_GET['page'] == "whatsapp") {
+
+        // Configuramos um nome único para o QR Code com base no número da matrícula.
+        $qrCodeName =  "../img-qrcodes/whatsapp/". date('d-m-Y H-m-i') .".png";
+            
+        /**
+         * Realizamos a criação da imagem PNG, sendo passado as seguintes informações:
+         * 1º - A string que desejamos inserir no QR Code.
+         * 2º - O nome da imagem que criamos no passo anterior.
+         */
+        if(isset($_GET['cellphone']))
+        {
+            $texto =  str_replace(" ", '%20' , $_GET['message']);
+
+            $array_cellphone = array(" ", "(", ")", "-");
+            $cellphone = str_replace($array_cellphone, '', $_GET['cellphone']);
+            
+            QRcode::png(isset($_GET['cellphone']) ? "https://api.whatsapp.com/send?phone=55". $cellphone ."&text=".$texto : 'www.programadormaroto.co', $qrCodeName, QR_ECLEVEL_H);
+        }
+        
+        header('Location: '. '../pages/index.php?page=whatsapp&arquivo='. $qrCodeName .'&cellphone='. $_GET['cellphone']. '&message='. $_GET['message']);
 
     }
 }

@@ -3,7 +3,7 @@
         <a href="javascript:void(0)" class="simple-text logo-mini">
         DM
         </a>
-        <a href="javascript:void(0)" class="simple-text logo-normal">
+        <a href="https://instagram.com/programadormaroto?igshid=xfyj59z44u9z" target="_blank" class="simple-text logo-normal">
         DEV MAROTO
         </a>
     </div>
@@ -36,6 +36,12 @@
             <a href="?page=email">
             <i class="tim-icons icon-email-85"></i>
             <p>Email</p>
+            </a>
+        </li>
+        <li class="<?= ($_GET['page']) == 'whatsapp' ? 'active' : '' ?>">
+            <a href="?page=whatsapp">
+            <i class="tim-icons icon-send"></i>
+            <p>WhatsApp</p>
             </a>
         </li>
     </ul>
